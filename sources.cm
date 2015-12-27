@@ -1,0 +1,10 @@
+Library
+  structure Syntax 
+  structure Unify
+is
+  syntax.sml
+  unify.sml
+  ../utils/sources.cm
+
+  $/basis.cm
+  $/smlnj-lib.cm
