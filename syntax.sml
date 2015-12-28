@@ -1,8 +1,26 @@
-(* When testing this file for dev purposes, you'll need to run *)
-(* it after calling `CM.make("../utils/sources.cm")`, since it *)
-(* relies on the functions available in the utils library. *)
+signature SYNTAX =
+sig
+  type constant
+  type variable
+  datatype term = VAR of variable
+                | CON of constant
+                | CMP of constant * term list
+  type atomic_prop
+  type clause
+  type assertion
+  type environment
+  type database
+  datatype toplevel_cmd = ASSERT of assertion
+                        | GOAL of clause
+                        | USE of string
+                        | QUIT
 
-structure Syntax =
+  val subInTerm : environment -> term -> term
+  val envToString : environment -> string
+  val occurs : variable -> term -> bool
+end
+
+structure Syntax : SYNTAX =
 struct
 
 type constant = string
@@ -69,7 +87,7 @@ fun envToString env =
       fun topLevelBinding ((_,n),_) = n = 0
   in
       case List.filter topLevelBinding env
-       of []       => "Succeeds."
+       of []       => "Success"
         | bindings => (concatSep "\n" o List.map bindingToString) bindings
   end
 
