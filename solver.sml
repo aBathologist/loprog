@@ -1,3 +1,21 @@
+signature DATA =
+sig
+  val base : Syntax.database ref
+end
+
+structure TestData : DATA =
+struct
+val base = ref ([
+                   (("father",[CON "adam",CON "cain"]), []),
+                   (("father",[CON "cain",CON "enoch"]), [])
+                ]
+                : Syntax.database);
+end
+
+
+functor Solver(Db:DATA) =
+struct
+
 open Syntax
 
 (* Representation of a choice point.
@@ -13,7 +31,7 @@ type choice = { db    : database,
                 depth : int }
 
 (* Global database *)
-val base = ref ([] : database)
+val base = Db.base
 
 (* assert fact to end of databse *)
 fun assertz a = base := !base @ [a]
@@ -46,7 +64,7 @@ fun displaySolution (choices : choice list) env =
    of ("Succeeds.", _) => printLn "Succeeds."
     | (answer, [])     => printLn answer
     | (answer, choice) =>
-      case promptForInput (answer ^ ";")
+      case promptForInput (answer)
        of SOME ";" => continueSearch choices
         | _        => raise NoSolution
 
@@ -90,4 +108,11 @@ and solve choices ({db, env, goal, depth}:choice) =
                 end
     end
 
+fun solveTopLevel g =
+  solve [] {db=(!base), env=[], goal=g, depth=1}
+  handle NoSolution => printLn "Fails"
 
+end
+
+structure S = Solver(TestData)
+open S

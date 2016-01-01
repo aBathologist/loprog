@@ -1,6 +1,7 @@
 Library
   structure Syntax 
   structure Unify
+  structure Dict
 is
   syntax.sml
   unify.sml

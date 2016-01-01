@@ -46,7 +46,7 @@ type environment = (variable * term) list
 (* dev: Example enivronment *)
 val env = [(("X",0), CON "a"), (("Y",0), CMP ("ass", [VAR ("Y",1), CON "cookie", CON "butts"]))] : environment
 
-(* (* A database is a list of assertions *) *)
+(* A database is a list of assertions *)
 type database = assertion list
 
 datatype toplevel_cmd = ASSERT of assertion
