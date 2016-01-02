@@ -1,7 +1,10 @@
 Library
   structure Syntax 
   structure UnifierChk
+
   structure Dict
+  structure ListExtra 
+
   signature SYNTAX
 is
   syntax.sml
