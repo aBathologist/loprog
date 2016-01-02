@@ -1,7 +1,8 @@
 Library
   structure Syntax 
-  structure Unify
+  structure UnifierChk
   structure Dict
+  signature SYNTAX
 is
   syntax.sml
   unify.sml
