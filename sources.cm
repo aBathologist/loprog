@@ -1,15 +1,26 @@
 Library
+  (* Library exports *)
   structure Syntax 
   structure UnifierChk
-
-  structure Dict
-  structure ListExtra 
+  structure Unifier
 
   signature SYNTAX
+  
+  (* Utility reexprts — remove if unneccessary *) 
+  structure Dict
+  structure ListExtras
+
 is
+  (* Library source files *) 
   syntax.sml
-  unify.sml
+  unifier.sml
+
+  (* Testing modules *)
+  (* tests.sml *)
+
+  (* Utility library *)
   ../utils/sources.cm
 
+  (* Basic libraries *)
   $/basis.cm
   $/smlnj-lib.cm

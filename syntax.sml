@@ -16,6 +16,7 @@ sig
                         | QUIT
 
   val subInTerm : environment -> term -> term
+  val toString  : term -> string
   val envToString : environment -> string
   val occurs : variable -> term -> bool
 end
